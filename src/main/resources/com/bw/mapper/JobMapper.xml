@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.JobMapper">
+	<select id="queryAllJob" resultType="com.bw.entity.Job">
+		 select j.jname,j.jid,j.introduction,j.start,j.end,j.startdate,GROUP_CONCAT(l.lname)as lname,s1.sname as sname from job j
+left join job_light jl on j.jid = jl.jid
+left join light l on jl.lid = l.lid
+left join story s1 on j.story1 = s1.sid
+left join story s2 on j.story2 = s2.sid
+left join story s3 on j.story3 = s3.sid
+GROUP BY j.jid
+	</select>
+</mapper>
